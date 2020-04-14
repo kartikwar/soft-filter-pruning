@@ -1,0 +1,12 @@
+*.jpg
+.vscode/
+image_net
+*.pyc
+infer_log/
+logs/
+models/
+original_snapshots/
+small/
+snapshots/
+*.pickle
+imagenet_2012/

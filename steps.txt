@@ -1,0 +1,26 @@
+1.) Train the model from scratch without pruning, save it in a directory.
+----Run the file original_train.py
+
+2.) Train the model from scratch with pruning, save it in a directory.
+----Run the file pruning_train.py
+
+3.) Infer  1 on validation set and see time taken.
+----Run the file original_train.py with param -e
+
+4.) Infer 2 on validation set and see time taken
+----Run the file infer_pruned.py 
+
+sh scripts/infer_pruned.sh
+
+
+
+
+
+YUgal Steps:
+
+
+1.) Give Unpruned model ----same as step 1
+
+2.) Pruned model from scratch ---------- step 2
+
+3.) Remove zeroes from pruned model and save the model

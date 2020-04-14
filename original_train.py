@@ -1,6 +1,7 @@
 # https://github.com/pytorch/vision/blob/master/torchvision/models/__init__.py
 import argparse
 import os, sys
+os.environ["CUDA_VISIBLE_DEVICES"] = '0'
 import shutil
 import time
 
@@ -125,7 +126,7 @@ def main():
         num_workers=args.workers, pin_memory=True)
 
     if args.evaluate:
-        validate(val_loader, model, criterion)
+        validate(val_loader, model, criterion,log)
         return
 
     filename = os.path.join(args.save_dir, 'checkpoint.{}.{}.pth.tar'.format(args.arch, args.prefix))

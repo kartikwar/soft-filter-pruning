@@ -104,6 +104,16 @@ def main():
         batch_size=args.batch_size, shuffle=False,
         num_workers=args.workers, pin_memory=True)
 
+    # val_loader = torch.utils.data.DataLoader(
+    # datasets.ImageFolder(valdir, transforms.Compose([
+    #     # transforms.Scale(256),
+    #     transforms.Resize(256),
+    #     transforms.CenterCrop(224),
+    #     transforms.ToTensor(),
+    #     normalize,
+    # ])),
+    # batch_size=args.batch_size, shuffle=False, pin_memory=True)
+
     criterion = nn.CrossEntropyLoss().cuda()
 
     if args.get_small:
@@ -332,7 +342,10 @@ def extract_para(big_model):
 def get_bn_value(big_model, block_flag, pruned_index_per_layer):
     big_model.eval()
     bn_flag = "bn3" if block_flag == "conv3" else "bn2"
-    key_bn = [x for x in big_model.state_dict().keys() if "bn3" in x]
+    #original-changed
+    # key_bn = [x for x in big_model.state_dict().keys() if "bn3" in x]
+    keys = list(big_model.state_dict().keys())
+    key_bn = [x for x in big_model.state_dict().keys() if bn_flag in x]
     layer_flag_list = [[x[0:6], x[7], x[9:12], x] for x in key_bn if "weight" in x]
     # layer_flag_list = [['layer1', "0", "bn3",'layer1.0.bn3.weight']]
     bn_value = {}
